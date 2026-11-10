@@ -37,8 +37,7 @@
   .eyebrow{display:inline-flex;gap:8px;background:#fff;border:1px solid var(--line);padding:7px 14px;border-radius:999px;font-size:13px;font-weight:700;color:var(--ink-soft)}
   .eyebrow b{color:var(--teal)}
   h1{font-family:"Fraunces",serif;font-size:clamp(40px,6vw,70px);line-height:1.03;letter-spacing:-1.5px;margin:20px 0 18px}
-  .hl{position:relative;white-space:nowrap;z-index:0}
-  .hl:after{content:"";position:absolute;left:-4px;right:-4px;bottom:6px;height:16px;background:var(--chalk);z-index:-1;border-radius:4px;transform:rotate(-1deg)}
+  .hl{white-space:nowrap;padding:0 4px;margin:0 -4px;border-radius:4px;background:linear-gradient(transparent 64%,var(--chalk) 64%,var(--chalk) 90%,transparent 90%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
   .lede{font-size:19px;color:var(--ink-soft);max-width:540px;margin-bottom:30px}
   .btns{display:flex;gap:12px;flex-wrap:wrap}
   .btn{display:inline-block;text-decoration:none;font-weight:700;padding:15px 26px;border-radius:14px;border:0;transition:transform .15s,box-shadow .15s}
