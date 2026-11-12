@@ -128,6 +128,25 @@ if(window.matchMedia&&matchMedia('(hover: hover) and (pointer: fine)').matches){
  addEventListener('scroll',close,{passive:true});
 }
 
+/* ---------- phone links on phones: let people choose Call or Text ---------- */
+if(!(window.matchMedia&&matchMedia('(hover: hover) and (pointer: fine)').matches)){
+ let bg=null,sh=null;
+ const close=()=>{if(sh){sh.remove();bg.remove();sh=bg=null}};
+ document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="tel:"]');
+  if(!a||e.target.closest('.sheet'))return;
+  e.preventDefault();close();
+  const tel='+16504713291',num='(650) 471-3291';
+  bg=document.createElement('div');bg.className='sheet-bg';bg.onclick=close;
+  sh=document.createElement('div');sh.className='sheet';sh.setAttribute('role','dialog');
+  sh.innerHTML=ES?`<small>Comunícate con J</small><span class="num">${num}</span><a class="c1" href="tel:${tel}">📞 Llamar</a><a class="c2" href="sms:${tel}">💬 Enviar mensaje de texto</a><button class="c3">Cancelar</button>`
+   :`<small>Reach J at</small><span class="num">${num}</span><a class="c1" href="tel:${tel}">📞 Call</a><a class="c2" href="sms:${tel}">💬 Text</a><button class="c3">Cancel</button>`;
+  document.body.append(bg,sh);
+  sh.querySelector('.c3').onclick=close;
+  sh.querySelectorAll('a').forEach(x=>x.addEventListener('click',()=>setTimeout(close,300)));
+ });
+}
+
 /* ---------- booking form (demo) ---------- */
 const bf=$('bookForm');
 if(bf)bf.addEventListener('submit',e=>{e.preventDefault();bf.style.display='none';$('sent').style.display='block'});
