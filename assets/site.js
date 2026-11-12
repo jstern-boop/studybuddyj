@@ -104,6 +104,30 @@ if(finder){
  renderF();
 }
 
+/* ---------- phone links on computers: show the number instead of an app picker ---------- */
+if(window.matchMedia&&matchMedia('(hover: hover) and (pointer: fine)').matches){
+ let pop=null;
+ const close=()=>{if(pop){pop.remove();pop=null}};
+ document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="tel:"]');
+  if(!a){if(pop&&!e.target.closest('.callpop'))close();return}
+  e.preventDefault();close();
+  const num='(650) 471-3291';
+  pop=document.createElement('div');pop.className='callpop';pop.setAttribute('role','dialog');
+  pop.innerHTML=ES?`<small>Llama o envía un mensaje de texto a J</small><span class="num">${num}</span><div class="row"><button class="cp">Copiar número</button><button class="x">Cerrar</button></div><p>Llama o envía un mensaje desde tu teléfono.</p>`
+   :`<small>Call or text J</small><span class="num">${num}</span><div class="row"><button class="cp">Copy number</button><button class="x">Close</button></div><p>Call or text from your phone.</p>`;
+  document.body.appendChild(pop);
+  const r=a.getBoundingClientRect(),w=290;
+  let left=Math.min(Math.max(12,r.right-w),innerWidth-w-12),top=r.bottom+10;
+  if(top+190>innerHeight)top=Math.max(12,r.top-200);
+  pop.style.left=left+'px';pop.style.top=top+'px';
+  pop.querySelector('.x').onclick=close;
+  pop.querySelector('.cp').onclick=function(){const b=this;(navigator.clipboard?navigator.clipboard.writeText(num):Promise.reject()).then(()=>{b.textContent=ES?'¡Copiado!':'Copied!'}).catch(()=>{b.textContent=ES?'Selecciona el número':'Select the number above'})};
+ });
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+ addEventListener('scroll',close,{passive:true});
+}
+
 /* ---------- booking form (demo) ---------- */
 const bf=$('bookForm');
 if(bf)bf.addEventListener('submit',e=>{e.preventDefault();bf.style.display='none';$('sent').style.display='block'});
