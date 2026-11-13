@@ -275,3 +275,5 @@
   .sheet .c1{background:var(--navy);color:#fff}
   .sheet .c2{background:var(--chalk);color:var(--navy)}
   .sheet .c3{background:var(--grid);color:var(--ink)}
+  @media(max-width:900px){.hero{padding-bottom:76px}}
+  .arrow{white-space:nowrap}
