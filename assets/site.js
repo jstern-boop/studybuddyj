@@ -147,7 +147,27 @@ if(!(window.matchMedia&&matchMedia('(hover: hover) and (pointer: fine)').matches
  });
 }
 
-/* ---------- booking form (demo) ---------- */
+/* ---------- booking form: sends to email via Web3Forms ---------- */
+const W3F_KEY='W3F_KEY_HERE';
 const bf=$('bookForm');
-if(bf)bf.addEventListener('submit',e=>{e.preventDefault();bf.style.display='none';$('sent').style.display='block'});
+if(bf)bf.addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(bf.elements.botcheck&&bf.elements.botcheck.checked)return;
+ const btn=bf.querySelector('button[type=submit]'),label=btn.textContent,err=$('formErr');
+ btn.disabled=true;btn.textContent=ES?'Enviando…':'Sending…';if(err)err.style.display='none';
+ const v=id=>($(id)&&$(id).value||'').trim();
+ const data={access_key:W3F_KEY,
+  subject:'New lesson request: '+v('cl')+' ('+v('pn')+')',
+  from_name:'studybuddyj.net',replyto:v('em'),
+  Name:v('pn'),Email:v('em'),Class:v('cl'),'Next test':v('tt')||'(not given)',
+  'Trouble with':v('ms')||'(not given)',Page:ES?'Spanish':'English'};
+ try{
+  const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok||j.success===false)throw 0;
+  bf.style.display='none';$('sent').style.display='block';
+ }catch(_){
+  btn.disabled=false;btn.textContent=label;if(err)err.style.display='block';
+ }
+});
 })();

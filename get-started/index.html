@@ -65,9 +65,10 @@
           <div><label for="cl">Class</label><select id="cl"><option>Algebra 1</option><option>Geometry</option><option>Algebra 2</option><option>Pre-Calculus</option><option>Calculus</option><option>Physics</option><option>Chemistry</option><option>Grades 4–8</option><option>Other</option></select></div>
           <div><label for="tt">Next test</label><input id="tt" type="date"></div>
           <div class="full"><label for="ms">What's giving you trouble?</label><textarea id="ms" rows="4" placeholder="e.g. Solving systems of equations. Test on Friday."></textarea></div>
-          <div class="full"><button class="btn btn-main" type="submit">Send request</button></div>
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="full"><p id="formErr" role="alert" style="display:none;color:#b42318;font-weight:600;margin:0 0 10px">Sorry, that didn't go through. Please try again, or call or text J at <a href="tel:+16504713291">(650) 471-3291</a>.</p><button class="btn btn-main" type="submit">Send request</button></div>
         </form>
-        <div class="sent" id="sent">Thanks! Your request is on its way to J. (Demo: on the real site this goes straight to his email.)</div>
+        <div class="sent" id="sent">Thanks! Your request is on its way to J. He'll reply by email with a plan and a time.</div>
       </div>
     </div>
   </section>
