@@ -148,7 +148,7 @@ if(!(window.matchMedia&&matchMedia('(hover: hover) and (pointer: fine)').matches
 }
 
 /* ---------- booking form: sends to email via Web3Forms ---------- */
-const W3F_KEY='W3F_KEY_HERE';
+const W3F_KEY='5d42e1e9-7286-45f0-b2e0-21f5420ac821';
 const bf=$('bookForm');
 if(bf)bf.addEventListener('submit',async e=>{
  e.preventDefault();
